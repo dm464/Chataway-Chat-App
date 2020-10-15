@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { SendButton } from './SendButton';
+import { UserCount } from './UserCount';
 import { Socket } from './Socket';
 
 export function ChatLog() {
@@ -33,6 +34,7 @@ export function ChatLog() {
                     }
                 </ul>
             <SendButton />
+            <UserCount />
         </div>
     );
 }

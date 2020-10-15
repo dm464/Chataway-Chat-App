@@ -4,6 +4,9 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 
 MESSAGES_RECEIVED_CHANNEL = 'messages received'
+USER_COUNT_CHANNEL = 'user added/dropped'
+
+user_count = 0
 
 app = flask.Flask(__name__)
 
@@ -25,6 +28,9 @@ db = flask_sqlalchemy.SQLAlchemy(app)
 db.init_app(app)
 db.app = app
 
+def emit_user_count(channel):
+    socketio.emit(channel, {'user_count': user_count})
+
 def emit_all_messages(channel):
     # TODO -- Content.jsx is looking for a key called allAddresses
     all_messages = [ \
@@ -36,14 +42,17 @@ def emit_all_messages(channel):
         'allMessages': all_messages
     })
 
+
 @socketio.on('connect')
 def on_connect():
     print('Someone connected!')
     socketio.emit('connected', {
         'test': 'Connected'
     })
-    
-    # TODO
+    global user_count
+    user_count+=1
+
+    emit_user_count(USER_COUNT_CHANNEL)
     emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
     
 
@@ -53,6 +62,10 @@ def on_disconnect():
     socketio.emit('disconnected', {
         'test': 'Disconnected'
     })
+    global user_count
+    user_count-=1
+
+    emit_user_count(USER_COUNT_CHANNEL)
 
 @socketio.on('new message sent')
 def on_new_message(data):
