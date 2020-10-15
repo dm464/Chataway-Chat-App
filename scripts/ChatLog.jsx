@@ -29,7 +29,7 @@ export function ChatLog() {
                     {
                     // TODO -- display all addresses
                         messages.map(
-                            (message, index) => <li key={index}>{message}</li>)
+                            (message, index) => <li key={index}>{message['user']} - {message['message']}</li>)
                     }
                 </ul>
             <SendButton />

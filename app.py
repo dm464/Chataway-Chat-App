@@ -28,7 +28,7 @@ db.app = app
 def emit_all_messages(channel):
     # TODO -- Content.jsx is looking for a key called allAddresses
     all_messages = [ \
-        db_message.message for db_message in \
+        {'user': db_message.user, 'message': db_message.message} for db_message in \
         db.session.query(models.Message).all()
     ]
     

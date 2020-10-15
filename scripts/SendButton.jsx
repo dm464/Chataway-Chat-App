@@ -12,7 +12,6 @@ function handleSubmit(event) {
     console.log('Sent the message \'' + newMessage.value + '\' to server!');
     newMessage.value = ''
     user.value = ''
-    
     event.preventDefault();
 }
 
