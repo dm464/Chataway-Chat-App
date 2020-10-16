@@ -1,5 +1,5 @@
 # app.py
-import os, flask, flask_sqlalchemy, flask_socketio, models 
+import os, flask, flask_sqlalchemy, flask_socketio, models, bot
 from os.path import join, dirname
 from dotenv import load_dotenv
 
@@ -73,6 +73,11 @@ def on_new_message(data):
     
     db.session.add(models.Message(data["user"], data["message"]));
     db.session.commit();
+    
+    if bot.is_bot_command(data["message"]):
+        reply = bot.bot_reply(data["message"])
+        db.session.add(models.Message("bot", reply));
+        db.session.commit();
     
     emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
 
