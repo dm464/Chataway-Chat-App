@@ -1,7 +1,7 @@
 # app.py
 import os, flask, flask_sqlalchemy, flask_socketio, models, bot
 from os.path import join, dirname
-from dotenv import load_dotenv
+import dotenv
 
 MESSAGES_RECEIVED_CHANNEL = 'messages received'
 USER_COUNT_CHANNEL = 'user added/dropped'
@@ -13,14 +13,13 @@ app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 socketio.init_app(app, cors_allowed_origins="*")
 
-dotenv_path = join(dirname(__file__), 'sql.env')
-load_dotenv(dotenv_path)
+try:
+    dotenv_path = join(dirname(__file__), 'sql.env')
+    dotenv.load_dotenv(dotenv_path)
+except AttributeError:
+    pass
 
-sql_user = os.environ['SQL_USER']
-sql_pwd = os.environ['SQL_PASSWORD']
-
-database_uri = 'postgresql://{}:{}@localhost/postgres'.format(
-    sql_user, sql_pwd)
+database_uri = os.environ['DATABASE_URL']
 
 app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
 
