@@ -2,3 +2,4 @@ sql.env
 __pycache__
 package-lock.json
 node_modules/
+static/script.js
