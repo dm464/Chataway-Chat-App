@@ -1,3 +1,4 @@
+import requests, json
 from datetime import date, datetime
 
 ABOUT = "about"
@@ -39,7 +40,7 @@ def bot_reply(message):
         return "Uh oh! That's not a valid command. Type \"!! Help\" for guidance"
 
 def about_command():
-    return "How art thou? T'is I, none other than Sir Robot. My assistance I give to thee."
+    return "How art thou? T'is I, none other than Sir Robot. I am hither to assist thee."
     
 def help_command():
     ret_str = "Though needeth my help? Use the following commands: \n"
@@ -63,4 +64,7 @@ def date_command():
     return "Today is " + today
 
 def funtranslate_command(message):
-    return "Translate: Sorry, still need location API"
+    url = "https://api.funtranslations.com/translate/shakespeare.json?text={}".format(message)
+    json_body = requests.get(url).json()
+    translated_message = json_body["contents"]["translated"]
+    return translated_message
