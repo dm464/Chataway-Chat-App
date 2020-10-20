@@ -10,7 +10,7 @@ body {
 
 .chat_log {
     background-color: rgba(158, 181, 164, 0.1);
-    width: 75%;
+    width: 60%;
     height: 55%;
     padding: 10px;
     border-radius: 25px;
@@ -67,7 +67,6 @@ input:focus {
     width: 50%;
     height:100px;
     border-radius: 20px;
-    padding: 0.4em 0.4em 0.4em 0;
     text-align: left;
     padding-top: 0;
     padding-bottom: 0.4em;
