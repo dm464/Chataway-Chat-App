@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, os, dotenv
 from datetime import date, datetime
 
 ABOUT = "about"
@@ -7,6 +7,13 @@ LOCATION = "location"
 TIME = "time"
 DATE = "date"
 FUNSTRANSLATE = "funtranslate"
+
+try:
+    dotenv_path = os.path.join(os.path.dirname(__file__), 'ipstack.env')
+    dotenv.load_dotenv(dotenv_path)
+except AttributeError:
+    pass
+IPSTACK_KEY=os.environ["IPSTACK_KEY"]
 
 def is_bot_command(message):
     message_arr = message.split(" ")
@@ -53,7 +60,13 @@ def help_command():
     return ret_str;
 
 def location_command():
-    return "Location: Sorry, still need location API"
+    url = "http://api.ipstack.com/check?access_key={}".format(IPSTACK_KEY)
+    json_body = requests.get(url).json()
+    city = json_body["city"]
+    region = json_body["region_name"]
+    country_code = json_body["country_code"]
+    # For further enhancement, I can add flag emoji
+    return "Your current location is {}, {} {}".format(city, region, country_code)
 
 def time_command():
     time = datetime.now().strftime("%H:%M")
