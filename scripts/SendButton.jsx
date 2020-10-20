@@ -3,7 +3,7 @@ import { Socket } from './Socket';
 
 function handleSubmit(event) {
     let user = document.getElementById("user");
-    let newMessage = document.getElementById("typedMessage");
+    let newMessage = document.getElementById("typed_message");
 
     console.log('User sent new message: ', newMessage);
     
@@ -18,8 +18,8 @@ function handleSubmit(event) {
 export function SendButton() {
     return (
         <form onSubmit={handleSubmit}>
-            <input id="user"></input>
-            <input id="typedMessage" placeholder="Type a message..."></input>
+            <input id="user" placeholder="Username"></input><br></br>
+            <input id="typed_message" placeholder="Type a message..."></input><br></br>
             <button>Send</button>
         </form>
     );

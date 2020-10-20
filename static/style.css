@@ -1,0 +1,75 @@
+body {
+    background-image: url('https://cdn.hipwallpaper.com/i/79/61/RgZhWL.jpg');
+    background-size: cover;
+    background-color: rgba(181, 222, 231, 0.5);
+    background-blend-mode: overlay;
+    font-family: Quicksand;
+    font-size: 20px;
+    text-align: center;
+}
+
+.chat_log {
+    background-color: rgba(158, 181, 164, 0.1);
+    width: 75%;
+    height: 55%;
+    padding: 10px;
+    border-radius: 25px;
+    position: relative;
+    margin: auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+ul {
+    padding-left: 0px;
+}
+
+.message {
+    list-style-type: none;
+}
+
+div.message_box {
+    background-color: darkslategrey;
+    color: #c0c4c3;
+    width: auto;
+    float: left;
+    max-width: 60%;
+    margin: 5px;
+    margin-right: 40%;
+    padding: 10px;
+    border-radius: 10px;
+}
+.message_box#bot {
+    background-color: #cdfaef;
+    color: black;
+    font-family: 'Courier Prime';
+}
+
+input {
+    font-family: Quicksand;
+    border: none;
+    margin: 5px;
+    font-size: 20px;
+}
+
+input:focus {
+    outline: none;
+}
+
+#user {
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#typed_message {
+    width: 50%;
+    height:100px;
+    border-radius: 20px;
+    padding: 0.4em 0.4em 0.4em 0;
+    text-align: left;
+    padding-top: 0;
+    padding-bottom: 0.4em;
+    vertical-align: top;
+}

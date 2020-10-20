@@ -25,18 +25,22 @@ export function ChatLog() {
 
     return (
         <div>
-            <h1>Chat Bot!</h1>
-            <div class="chat_log">
-                <ul>
-                    {
-                    // TODO -- display all addresses
-                        messages.map(
-                            (message, index) => <li key={index} class="message">{message['user']} - {message['message']}</li>)
-                    }
-                </ul>
+            <h1>CHATAWAY</h1>
+            <div class="chat_box">
+                <div class="chat_log">
+                    <ul>
+                        {
+                        // TODO -- display all addresses
+                            messages.map(
+                                (message, index) =>
+                                <li key={index} class="message"><div class="message_box" id={message['user']}>
+                                {message['user']} - {message['message']}</div></li>)
+                        }
+                    </ul>
+                </div>
+                <SendButton />
+                <UserCount />
             </div>
-            <SendButton />
-            <UserCount />
         </div>
     );
 }
