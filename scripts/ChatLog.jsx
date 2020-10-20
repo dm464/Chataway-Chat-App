@@ -26,13 +26,15 @@ export function ChatLog() {
     return (
         <div>
             <h1>Chat Bot!</h1>
+            <div class="chat_log">
                 <ul>
                     {
                     // TODO -- display all addresses
                         messages.map(
-                            (message, index) => <li key={index}>{message['user']} - {message['message']}</li>)
+                            (message, index) => <li key={index} class="message">{message['user']} - {message['message']}</li>)
                     }
                 </ul>
+            </div>
             <SendButton />
             <UserCount />
         </div>
