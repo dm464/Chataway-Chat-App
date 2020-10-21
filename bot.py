@@ -1,4 +1,4 @@
-import requests, json, os, dotenv
+import requests, json, os, dotenv, validators
 from datetime import date, datetime
 
 ABOUT = "about"
@@ -21,7 +21,6 @@ def is_bot_command(message):
         return True
     else:
         return False
-
 
 def bot_reply(message):
     message_arr = message.split(" ")
@@ -78,3 +77,8 @@ def funtranslate_command(message):
     json_body = requests.get(url).json()
     translated_message = json_body["contents"]["translated"]
     return translated_message
+
+def render(message):
+    valid=validators.url(message)
+    if valid == True:
+        return "<a href=\"{}\" target=\"_blank\">{}</a>".format(message, message)
