@@ -40,19 +40,19 @@ def bot_reply(message):
     elif command == FUNSTRANSLATE:
         return funtranslate_command(message)
     else:
-        return "Uh oh! \'{}\' is not a valid command. Type \'!! help\' for guidance.".format(message)
+        return "Uh oh! \'{}\' is not a valid command.<br>Type \'!! help\' for guidance.".format(message)
 
 def about_command():
     return "How art thou? T'is I, none other than Sir Robot. I am hither to assist thee."
     
 def help_command():
-    ret_str = "Though needeth my help? Use the following commands: \n"
-    ret_str += "!! about - gives bot description\n"
-    ret_str += "!! help - displays list of commands\n"
-    ret_str += "!! location - gives current location\n"
-    ret_str += "!! time - gives current local time\n"
-    ret_str += "!! date - give current date\n"
-    ret_str += "!! funtranslate <message> - I'll translate the message into Shakespearean English\n"
+    ret_str = "Do you need my help? Use the following commands: <br>"
+    ret_str += "!! about - get a description about me<br>"
+    ret_str += "!! help - displays list of bot commands<br>"
+    ret_str += "!! location - current location<br>"
+    ret_str += "!! time - current local time<br>"
+    ret_str += "!! date - current date<br>"
+    ret_str += "!! funtranslate message - I'll translate the message into Shakespearean English"
     return ret_str;
 
 def location_command():

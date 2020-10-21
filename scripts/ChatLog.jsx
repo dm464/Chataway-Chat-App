@@ -3,10 +3,11 @@ import * as React from 'react';
 import { SendButton } from './SendButton';
 import { UserCount } from './UserCount';
 import { Socket } from './Socket';
+import { Markup } from 'interweave';
 
 export function ChatLog() {
     const [messages, setMessages] = React.useState([]);
-    
+
     function getNewMessages() {
         React.useEffect(() => {
             Socket.on('messages received', updateMessages);
@@ -17,7 +18,7 @@ export function ChatLog() {
     }
     
     function updateMessages(data) {
-        console.log("Received messages from server: " + data['allMessages']);
+        console.log("Received messages from server: ");
         setMessages(data['allMessages']);
     }
     
@@ -32,9 +33,9 @@ export function ChatLog() {
                         {
                         // TODO -- display all addresses
                             messages.map(
-                                (message, index) =>
+                                (message, index) => 
                                 <li key={index} class="message"><div class="message_box" id={message['user']}>
-                                {message['user']} - {message['message']}</div></li>)
+                                <Markup content={message['message']} /></div></li>)
                         }
                     </ul>
                 </div>
