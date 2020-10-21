@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-//import { GoogleButton } from './GoogleButton';
+import { GoogleButton } from './GoogleButton';
 import { FacebookButton } from './FacebookButton';
 //import { InstagramButton } from './InstagramButton';
 //import { TwitterButton } from './TwitterButton';
@@ -41,6 +41,7 @@ export function Login() {
     return (
         <div class="form-popup" id="login-form">
         <FacebookButton />
+        <GoogleButton />
         </div>
     );
 }

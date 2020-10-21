@@ -77,6 +77,11 @@ def on_new_facebook_user(data):
     print("Got an event for new facebook user input with data:", data)
     push_new_user_to_db(models.AuthUserType.FACEBOOK, data["name"], data["email"], data["picture"])
 
+@socketio.on('new google user')
+def on_new_google_user(data):
+    print("Got an event for new google user input with data:", data)
+    push_new_user_to_db(models.AuthUserType.GOOGLE, data["name"], data["email"], data["picture"])
+
 @socketio.on('new message sent')
 def on_new_message(data):
     print("Got an event for new message with data:", data)
