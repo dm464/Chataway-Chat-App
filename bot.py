@@ -1,4 +1,4 @@
-import requests, json, os, dotenv, validators
+import requests, json, os, dotenv, validators, validate
 from datetime import date, datetime
 
 ABOUT = "about"
@@ -80,5 +80,10 @@ def funtranslate_command(message):
 
 def render(message):
     valid=validators.url(message)
-    if valid == True:
-        return "<a href=\"{}\" target=\"_blank\">{}</a>".format(message, message)
+    if valid:
+        rendered_message = "<a href=\"{}\" target=\"_blank\">{}</a>".format(message, message)
+        if validate.imageFile(message):
+            rendered_message += "<br><img src=\"{}\" alt=\"{}\">".format(message, message)
+        return rendered_message
+    else:
+        return message
