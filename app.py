@@ -3,6 +3,7 @@ import os, flask, flask_sqlalchemy, flask_socketio, models, bot
 from os.path import join, dirname
 import dotenv
 
+USERS_UPDATED_CHANNEL = 'users updated'
 MESSAGES_RECEIVED_CHANNEL = 'messages received'
 USER_COUNT_CHANNEL = 'user added/dropped'
 
@@ -26,6 +27,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
 db = flask_sqlalchemy.SQLAlchemy(app)
 db.init_app(app)
 db.app = app
+
+def push_new_user_to_db(auth_type, name, email, picture):
+    # TODO remove this check after the logic works correctly
+    db.session.add(models.AuthUser(auth_type, name, email, picture));
+    db.session.commit();
+    print("Added {} to database".format(name))
 
 def emit_user_count(channel):
     socketio.emit(channel, {'user_count': user_count})
@@ -65,6 +72,11 @@ def on_disconnect():
 
     emit_user_count(USER_COUNT_CHANNEL)
 
+@socketio.on('new facebook user')
+def on_new_facebook_user(data):
+    print("Got an event for new facebook user input with data:", data)
+    push_new_user_to_db(models.AuthUserType.FACEBOOK, data["name"], data["email"], data["picture"])
+
 @socketio.on('new message sent')
 def on_new_message(data):
     print("Got an event for new message with data:", data)
@@ -80,13 +92,13 @@ def on_new_message(data):
     emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
 
 @app.route('/')
-def index():
+def chat():
     models.db.create_all()
     db.session.commit()
     emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
 
     return flask.render_template("index.html")
-
+    
 
 if __name__ == '__main__': 
     socketio.run(

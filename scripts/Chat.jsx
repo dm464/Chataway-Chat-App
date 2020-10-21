@@ -2,9 +2,10 @@ import * as React from 'react';
 
 import { SendButton } from './SendButton';
 import { UserCount } from './UserCount';
+import { Login } from './Login';
 import { Socket } from './Socket';
 
-export function ChatLog() {
+export function Chat() {
     const [messages, setMessages] = React.useState([]);
     
     function getNewMessages() {
@@ -40,6 +41,7 @@ export function ChatLog() {
                 </div>
                 <SendButton />
                 <UserCount />
+                <Login />
             </div>
         </div>
     );
