@@ -3,7 +3,6 @@ import os, flask, flask_sqlalchemy, flask_socketio, models, bot
 from os.path import join, dirname
 import dotenv
 
-USERS_UPDATED_CHANNEL = 'users updated'
 MESSAGES_RECEIVED_CHANNEL = 'messages received'
 USER_COUNT_CHANNEL = 'user added/dropped'
 
@@ -29,7 +28,6 @@ db.init_app(app)
 db.app = app
 
 def push_new_user_to_db(auth_type, name, email, picture):
-    # TODO remove this check after the logic works correctly
     db.session.add(models.AuthUser(auth_type, name, email, picture));
     db.session.commit();
     print("Added {} to database".format(name))
@@ -37,15 +35,13 @@ def push_new_user_to_db(auth_type, name, email, picture):
 def emit_user_count(channel):
     socketio.emit(channel, {'user_count': user_count})
 
-def emit_all_messages(channel):
+def emit_all_messages(channel, room):
     all_messages = [ \
         {'user': db_message.user, 'message': db_message.message} for db_message in \
         db.session.query(models.Message).all()
     ]
     
-    socketio.emit(channel, {
-        'allMessages': all_messages
-    })
+    socketio.emit(channel, {'allMessages': all_messages}, room=room)
 
 
 @socketio.on('connect')
@@ -57,9 +53,6 @@ def on_connect():
     global user_count
     user_count+=1
 
-    emit_user_count(USER_COUNT_CHANNEL)
-    emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
-    
 
 @socketio.on('disconnect')
 def on_disconnect():
@@ -71,6 +64,15 @@ def on_disconnect():
     user_count-=1
 
     emit_user_count(USER_COUNT_CHANNEL)
+
+@socketio.on('join')
+def on_join(data):
+    username = data['username']
+    room = data['room']
+    flask_socketio.join_room(room)
+    flask_socketio.send(username + ' has entered the room.', room=room)
+    emit_user_count(USER_COUNT_CHANNEL)
+    emit_all_messages(MESSAGES_RECEIVED_CHANNEL, room)
 
 @socketio.on('new facebook user')
 def on_new_facebook_user(data):
@@ -94,13 +96,12 @@ def on_new_message(data):
         db.session.add(models.Message("bot", reply));
         db.session.commit();
     
-    emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
+    emit_all_messages(MESSAGES_RECEIVED_CHANNEL, flask_socketio.request.ssd)
 
 @app.route('/')
 def chat():
     models.db.create_all()
     db.session.commit()
-    emit_all_messages(MESSAGES_RECEIVED_CHANNEL)
 
     return flask.render_template("index.html")
     

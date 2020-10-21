@@ -12,6 +12,10 @@ function handleFacebookOAuthLogin(response) {
         'email': email,
         'picture': picture
     });
+        Socket.emit('join', {
+        'username': name,
+        'room': 'main chat'
+    });
     
     console.log('Sent the name ' + name + ' to server!');
 }

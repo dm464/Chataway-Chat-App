@@ -18,7 +18,7 @@ export function Chat() {
     }
     
     function updateMessages(data) {
-        console.log("Received messages from server: " + data['allMessages']);
+        console.log("Received all messages from server");
         setMessages(data['allMessages']);
     }
     

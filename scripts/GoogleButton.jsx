@@ -3,7 +3,7 @@ import { Socket } from './Socket';
 import GoogleLogin from 'react-google-login';
 
 function handleGoogleOAuthLogin(response) {
-    console.log(response);
+    console.log(response.profileObj.name + ' logged in successfully');
     let name = response.profileObj.name;
     let email = response.profileObj.email;
     let picture = response.profileObj.imageUrl;
@@ -11,6 +11,10 @@ function handleGoogleOAuthLogin(response) {
         'name': name,
         'email': email,
         'picture': picture
+    });
+    Socket.emit('join', {
+        'username': name,
+        'room': 'main chat'
     });
     
     console.log('Sent the name ' + name + ' to server!');
