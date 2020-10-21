@@ -83,7 +83,7 @@ def render(message):
     if valid:
         rendered_message = "<a href=\"{}\" target=\"_blank\">{}</a>".format(message, message)
         if validate.imageFile(message):
-            rendered_message += "<br><img src=\"{}\" alt=\"{}\">".format(message, message)
+            rendered_message += "<br><img src=\"{}\" alt=\"{}\" class=\"message-image\">".format(message, message)
         return rendered_message
     else:
         return message
