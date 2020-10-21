@@ -50,9 +50,11 @@ div.message_box {
 
 .message-image {
     max-width: 70%;
+    max-height: 200px;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 input {
