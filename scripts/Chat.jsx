@@ -4,10 +4,11 @@ import { SendButton } from './SendButton';
 import { UserCount } from './UserCount';
 import { Login } from './Login';
 import { Socket } from './Socket';
+import { Markup } from 'interweave';
 
 export function Chat() {
     const [messages, setMessages] = React.useState([]);
-    
+
     function getNewMessages() {
         React.useEffect(() => {
             Socket.on('messages received', updateMessages);
@@ -33,9 +34,9 @@ export function Chat() {
                         {
                         // TODO -- display all addresses
                             messages.map(
-                                (message, index) =>
+                                (message, index) => 
                                 <li key={index} class="message"><div class="message_box" id={message['user']}>
-                                {message['user']} - {message['message']}</div></li>)
+                                <Markup content={message['message']} /></div></li>)
                         }
                     </ul>
                 </div>

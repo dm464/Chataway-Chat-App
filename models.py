@@ -7,7 +7,7 @@ from enum import Enum
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(50))
-    message = db.Column(db.String(350))
+    message = db.Column(db.String(500))
     
     def __init__(self, u, m):
         self.user = u

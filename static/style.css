@@ -32,6 +32,8 @@ ul {
 div.message_box {
     background-color: darkslategrey;
     color: #c0c4c3;
+    text-align: left;
+    word-wrap: break-word;
     width: auto;
     float: left;
     max-width: 60%;
@@ -44,6 +46,15 @@ div.message_box {
     background-color: #cdfaef;
     color: black;
     font-family: 'Courier Prime';
+}
+
+.message-image {
+    max-width: 70%;
+    max-height: 200px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 input {
@@ -72,3 +83,4 @@ input:focus {
     padding-bottom: 0.4em;
     vertical-align: top;
 }
+

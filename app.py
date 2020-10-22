@@ -87,8 +87,8 @@ def on_new_google_user(data):
 @socketio.on('new message sent')
 def on_new_message(data):
     print("Got an event for new message with data:", data)
-    
-    db.session.add(models.Message(data["user"], data["message"]));
+    message = bot.render(data["message"])
+    db.session.add(models.Message(data["user"], message));
     db.session.commit();
     
     if bot.is_bot_command(data["message"]):
