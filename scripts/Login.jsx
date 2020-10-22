@@ -36,12 +36,14 @@ export function Login() {
     
     //getAllAccounts();
     
-    // TODO use these accounts for something
-    
     return (
-        <div class="form-popup" id="login-form">
-        <FacebookButton />
-        <GoogleButton />
+        <div>
+            <button class="login-button" onclick="openForm()">Sign In</button>
+            <div class="form-popup" id="login-form">
+                <FacebookButton />
+                <GoogleButton />
+            </div>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </div>
     );
 }

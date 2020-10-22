@@ -20,7 +20,7 @@ export function SendButton() {
         <form onSubmit={handleSubmit}>
             <input id="user" placeholder="Username"></input><br></br>
             <input id="typed_message" placeholder="Type a message..."></input><br></br>
-            <button>Send</button>
+            <button id="send-button">Send<i class="material-icons">send</i></button>
         </form>
     );
 }

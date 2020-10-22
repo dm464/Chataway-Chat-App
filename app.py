@@ -86,17 +86,18 @@ def on_new_google_user(data):
 
 @socketio.on('new message sent')
 def on_new_message(data):
-    print("Got an event for new message with data:", data)
-    message = bot.render(data["message"])
-    db.session.add(models.Message(data["user"], message));
-    db.session.commit();
-    
-    if bot.is_bot_command(data["message"]):
-        reply = bot.bot_reply(data["message"])
-        db.session.add(models.Message("bot", reply));
+    if "main chat" in flask_socketio.rooms():
+        print("Got an event for new message with data:", data)
+        message = bot.render(data["message"])
+        db.session.add(models.Message(data["user"], message));
         db.session.commit();
-    
-    emit_all_messages(MESSAGES_RECEIVED_CHANNEL, flask_socketio.request.ssd)
+        
+        if bot.is_bot_command(data["message"]):
+            reply = bot.bot_reply(data["message"])
+            db.session.add(models.Message("bot", reply));
+            db.session.commit();
+        
+        emit_all_messages(MESSAGES_RECEIVED_CHANNEL, "main chat")
 
 @app.route('/')
 def chat():

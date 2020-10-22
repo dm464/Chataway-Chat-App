@@ -26,8 +26,6 @@ export function FacebookButton() {
         appId="379610306412942"
         autoLoad={false}
         fields="name,email,picture"
-        callback={handleFacebookOAuthLogin}
-        cssClass="my-facebook-button-class"
-        icon="fa-facebook"  />
+        callback={handleFacebookOAuthLogin}  />
     );
 }

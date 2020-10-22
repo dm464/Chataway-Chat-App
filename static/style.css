@@ -84,3 +84,14 @@ input:focus {
     vertical-align: top;
 }
 
+#send-button {
+    font-family: Quicksand;
+    display: inline-flex;
+    align-items: center;
+    height:30px;
+    width: 75px;
+    color: white;
+    border-radius: 5px;
+    border-style: none;
+    background-color: seagreen;
+}
