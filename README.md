@@ -8,17 +8,17 @@ chat application that allows users to sign in and chat publically with other onl
 ## Setup
 To use this repository, you must follow these steps:
 ### 0. Clone this repo
-    - Run `git clone https://github.com/NJIT-CS490/project2-m2-dm464`
-    - Go to github and make a new personal repository.
-    - To make your own personal repository and have your git point to it, run the following:
-        `git remote rm origin` &&
-        `git remote add origin http://www.github.com/<your-username>/<your-repo-name>`.
-    - Run `git remote -v` and make sure this points to your newly created Github repo
-    - Now run `git push origin master`
+- Run `git clone https://github.com/NJIT-CS490/project2-m2-dm464`
+- Go to github and make a new personal repository.
+- To make your own personal repository and have your git point to it, run the following:
+    `git remote rm origin` &&
+    `git remote add origin http://www.github.com/<your-username>/<your-repo-name>`.
+- Run `git remote -v` and make sure this points to your newly created Github repo
+- Now run `git push origin master`
 
 ### 1. Upgrade Node version to 7
 
-```$ nvm install 7```
+`$ nvm install 7`
 
 ### 2. Setting up PSQL
 1. Install PostGreSQL: `sudo yum install postgresql postgresql-server postgresql-devel postgresql-contrib postgresql-docs`  
