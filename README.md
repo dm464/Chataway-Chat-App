@@ -35,10 +35,10 @@ To use this repository, you must follow these steps:
 4. Click "Credentials" in the left hand bar, then click "+ CREATE CREDENTIALS" and then click "OAuth client ID".  
 4.5. If you see a warning that says "To create an OAuth client ID, you must first set a 
 product name on the consent screen", do the following steps:  
-	1. Click the "CONFIGURE CONSENT SCREEN" button.
-	2. Choose "External"
-	3. For "Application name," specify "ChatApp" or something similar.
-	4. Press save.
+	a. Click the "CONFIGURE CONSENT SCREEN" button.
+	b. Choose "External"
+	c. For "Application name," specify "ChatApp" or something similar.
+	d. Press save.
 5. Go back to Credentials -> Create Credentials -> OAuth client ID. Click "web application".  
 6. Make name the "ChatApp" and under both Authorized JavaScript origins & Authorized redirect URIs you're going to click "Add URI" and paste the
 link for you website (once we deploy on heroku, we will have to add our heroku app link onto here too)
@@ -91,11 +91,11 @@ the file where if says `appId="<some-id>"``, you're going to replace <some-id> w
 3. Get SQLAlchemy: `pip install Flask-SQLAlchemy==2.1`  
 4. Make a new file called `sql.env` and add `DATABASE_URL='postgresql://<your-psql-username>:<your-password>@localhost/postgres'`in it
 5. to enable read/write from SQLAlchemy, there's a special file that you need to enable your db admin password to work for:  
-    1. Open the file in vim: `sudo vim /var/lib/pgsql9/data/pg_hba.conf`  
+    a. Open the file in vim: `sudo vim /var/lib/pgsql9/data/pg_hba.conf`  
     :warning: :warning: :warning: If that doesn't work: `sudo vim $(psql -c "show hba_file;" | grep pg_hba.conf)`  :warning: :warning: :warning:  
-    2. Replace all values of `ident` with `md5` in Vim: `:%s/ident/md5/g`
-    3. Save and exit by pressing ESC + : + x + Enter
-    4. After changing those lines, run `sudo service postgresql restart`  
+    b. Replace all values of `ident` with `md5` in Vim: `:%s/ident/md5/g`
+    c. Save and exit by pressing ESC + : + x + Enter
+    d. After changing those lines, run `sudo service postgresql restart`  
 
 #### Set up DB  
 0. `sudo service postgresql start`
@@ -121,8 +121,9 @@ to Heroku or GitHub.
 - `npm install interweave react` 
 - `npm install react-facebook-login`
 - `npm install react-google-login` 
-  :warning: :warning: :warning: If you see any error messages, make sure you use `sudo pip` or `sudo npm`.
-  If it says "pip cannot be found", run `which pip` and use `sudo [path to pip from which pip] install` :warning: :warning: :warning:
+
+:warning: :warning: :warning: If you see any error messages, make sure you use `sudo pip` or `sudo npm`.
+If it says "pip cannot be found", run `which pip` and use `sudo [path to pip from which pip] install` :warning: :warning: :warning:
   
 ### 7. Compile Javascript using Webpack
 
@@ -155,12 +156,12 @@ and verify that the React renders. You should the chat app.
 1. Log in to Heroku
 `heroku login -i`
 2. Create new Heroku app
-`heroku create`
-3. Create postregresql database on Heroku
-- `heroku addons:create heroku-postgresql:hobby-dev`
-***You can copy database using pg:copy***
-- `heroku pg:wait`
-4.	Make sure you are the owner of your database
+`heroku create <app-name>`
+3. Create postregresql database on Heroku:
+    - `heroku addons:create heroku-postgresql:hobby-dev`
+        ***You can copy database using pg:copy***
+    - `heroku pg:wait`
+4. Make sure you are the owner of your database
     a. Open psql
     b. Check list of users and roles `\du`
     c. Check list of databases `\l` (owner of postgres should be your username)
@@ -173,25 +174,27 @@ and verify that the React renders. You should the chat app.
     f. `PGUSER=username heroku pg:push postgres DATABASE_URL`
         - If this doesn’t work, remove `PGUSER=[]` command
         - When it works, ignore “pg_restore errored with 1” message
-5.	Connect to heroku psql
+5. Connect to heroku psql
     a. heroku `pg:psql`
     b. Here, you can run the same commands as in local psql
-6.	On Heroku console, configure variables by adding your secret keys (from ipstack.env). Go to <https://dashboard.heroku.com/apps>
+
+#### Pushing files into Heroku
+1. On Heroku console, configure variables by adding your secret keys (from ipstack.env). Go to <https://dashboard.heroku.com/apps>
     and click into your app. Click on Settings, then scroll to "Config Vars." Click
     "Reveal Config Vars" and add the key value pairs for each variable used.
     Your config var key names should be:
     DATABASE_URL ***This is automatically configured***
     IPSTACK_KEY
-7.	Create and push heroku files
+2. Create and push heroku files
     a. Configure Procfile with the command needed to run your app:
     `web: python app.py`
     b. Configure requirements.txt with all requirements needed to run your app:
         i. Automatically load all requirements onto requirements.txt with `pip freeze > requirements.txt` command
-8.	Commit and push changes to git
-9.	Push onto heroku with `git push heroku master`
-10.	After the app builds, navigate to your newly-created heroku site!
-11.	If the app is not working then restart all dynos from heroku app console
-12. If you are still having issues, you may use heroku logs --tail to see what's wrong.
+3.	Commit and push changes to git
+4.	Push onto heroku with `git push heroku master`
+5.	After the app builds, navigate to your newly-created heroku site!
+6.	If the app is not working then restart all dynos from heroku app console
+7. If you are still having issues, you may use heroku logs --tail to see what's wrong.
 
 
 
