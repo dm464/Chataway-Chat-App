@@ -132,7 +132,7 @@ configuration options, and starts transpiling your JS code into
 
 ```$ npm run watch```
 
-(The program should not stop running. Leave it running.)
+***The program should not stop running. Leave it running!***
 
 If this step fails for whatever reason, please close your terminal and restart it,
 and re-run the command.
@@ -165,14 +165,14 @@ and verify that the React renders. You should the chat app.
     b. Check list of users and roles ``\du`
     c. Check list of databases `\l` (owner of postgres should be your username)
     d. Change owner of postgres database and add roles:
-        i. `ALTER DATABASE postgres OWNER to <your-psql-username>;`
-        ii.	`ALTER ROLE <your-psql-username> WITH CREATEDB;`
-        iii. `ALTER ROLE <your-psql-username> WITH CREATEROLE;`
-        iv.	`ALTER ROLE <your-psql-username> WITH REPLICATION;`
+        - `ALTER DATABASE postgres OWNER to <your-psql-username>;`
+        - `ALTER ROLE <your-psql-username> WITH CREATEDB;`
+        - `ALTER ROLE <your-psql-username> WITH CREATEROLE;`
+        - `ALTER ROLE <your-psql-username> WITH REPLICATION;`
     e. Leave psql
     f. `PGUSER=username heroku pg:push postgres DATABASE_URL`
-        i.	If this doesn’t work, remove `PGUSER=[]` command
-        ii.	When it works, ignore “pg_restore errored with 1” message
+        - If this doesn’t work, remove `PGUSER=[]` command
+        - When it works, ignore “pg_restore errored with 1” message
 5.	Connect to heroku psql
     a. heroku `pg:psql`
     b. Here, you can run the same commands as in local psql
