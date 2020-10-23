@@ -162,7 +162,7 @@ and verify that the React renders. You should the chat app.
 - `heroku pg:wait`
 4.	Make sure you are the owner of your database
     a. Open psql
-    b. Check list of users and roles ``\du`
+    b. Check list of users and roles `\du`
     c. Check list of databases `\l` (owner of postgres should be your username)
     d. Change owner of postgres database and add roles:
         - `ALTER DATABASE postgres OWNER to <your-psql-username>;`
