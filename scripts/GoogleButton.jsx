@@ -27,7 +27,7 @@ function GoogleOAuthFailed(response) {
 export function GoogleButton() {
     return (
         <GoogleLogin
-        clientId="387589797855-drpmn0itocbndb0e1bab8ihqr4isbhd2.apps.googleusercontent.com"
+        clientId="1087078822501-d1a06225qo91k5skea3m4698eu4r4jv3.apps.googleusercontent.com"
         buttonText="Login"
         onSuccess={handleGoogleOAuthLogin}
         onFailure={GoogleOAuthFailed}
