@@ -1,5 +1,6 @@
 # app.py
 import os, flask, flask_sqlalchemy, flask_socketio, models, bot
+from datetime import datetime
 from os.path import join, dirname
 import dotenv
 
@@ -89,12 +90,13 @@ def on_new_message(data):
     if "main chat" in flask_socketio.rooms():
         print("Got an event for new message with data:", data)
         message = bot.render(data["message"])
-        db.session.add(models.Message(data["user"], message));
+        db.session.add(models.Message(data["user"], message, data["timestamp"]));
         db.session.commit();
         
         if bot.is_bot_command(data["message"]):
             reply = bot.bot_reply(data["message"])
-            db.session.add(models.Message("bot", reply));
+            bot_timestamp = datetime.now()
+            db.session.add(models.Message("bot", reply, bot_timestamp));
             db.session.commit();
         
         emit_all_messages(MESSAGES_RECEIVED_CHANNEL, "main chat")

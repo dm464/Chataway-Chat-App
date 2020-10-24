@@ -4,10 +4,10 @@ import { Socket } from './Socket';
 function handleSubmit(event) {
     let user = document.getElementById("user");
     let newMessage = document.getElementById("typed_message");
+    var date = new Date();
 
-    console.log('User sent new message: ', newMessage);
-    
-    Socket.emit("new message sent", {"user": user.value, "message": newMessage.value});
+    console.log('User sent new message: ', newMessage, ' at ', date);
+    Socket.emit("new message sent", {"user": user.value, "message": newMessage.value, "timestamp": date});
     
     console.log('Sent the message \'' + newMessage.value + '\' to server!');
     newMessage.value = ''
