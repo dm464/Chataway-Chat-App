@@ -81,7 +81,7 @@ def funtranslate_command(message):
 def render(message):
     valid=validators.url(message)
     if valid:
-        rendered_message = "<a href=\"{}\" target=\"_blank\">{}</a>".format(message, message)
+        rendered_message = "<a class=\"message_link\"href=\"{}\" target=\"_blank\">{}</a>".format(message, message)
         if validate.imageFile(message):
             rendered_message += "<br><img src=\"{}\" alt=\"{}\" class=\"message-image\">".format(message, message)
         return rendered_message
