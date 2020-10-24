@@ -31,13 +31,16 @@ export function Chat() {
             <div class="chat_box">
                 <div class="chat_log">
                     <ul>
-                        {
-                        // TODO -- display all addresses
-                            messages.map(
-                                (message, index) => 
-                                <li key={index} class="message"><div class="message_box" id={message['user']}>
-                                <Markup content={message['message']} /></div></li>)
-                        }
+                    {
+                        messages.map(
+                            (message, index) => 
+                            <li key={index} class="message">
+                            <div class="message_box" id={message['user']}>
+                                <div class="message_user">{message['user']}</div>
+                                <Markup content={message['message']} />
+                            </div>
+                            </li>)
+                    }
                     </ul>
                 </div>
                 <SendButton />
