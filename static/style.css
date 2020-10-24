@@ -31,6 +31,7 @@ ul {
     margin-top: 10px;
     margin-bottom:10px;
     display:flex;
+    flex-direction: column;
 }
 
 div.message_box {
@@ -63,6 +64,16 @@ div.message_box {
     font-size: 15px;
     font-family: Quicksand;
     font-weight: bold;
+}
+
+.timestamp {
+    font-size: 15px;
+    color: #063350;
+    padding: 3px;
+}
+
+.timestamp.dm464 {
+    margin-left: auto;
 }
 
 .message_link {

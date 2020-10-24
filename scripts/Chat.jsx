@@ -39,6 +39,7 @@ export function Chat() {
                                 <div class="message_user">{message['user']}</div>
                                 <Markup content={message['message']} />
                             </div>
+                            <div class={`timestamp ${message['user']}`}>{message['timestamp']}</div>
                             </li>)
                     }
                     </ul>

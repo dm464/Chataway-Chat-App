@@ -37,7 +37,7 @@ def emit_user_count(channel):
 
 def emit_all_messages(channel, room):
     all_messages = [ \
-        {'user': db_message.user, 'message': db_message.message} for db_message in \
+        {'user': db_message.user, 'message': db_message.message, 'timestamp': str(db_message.timestamp)} for db_message in \
         db.session.query(models.Message).all()
     ]
     
