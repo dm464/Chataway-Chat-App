@@ -7,6 +7,7 @@ LOCATION = "location"
 TIME = "time"
 DATE = "date"
 FUNSTRANSLATE = "funtranslate"
+BOT_PIC = "https://media.istockphoto.com/vectors/robot-icon-vector-artificial-intelligence-vector-id1161996344"
 
 try:
     dotenv_path = os.path.join(os.path.dirname(__file__), 'ipstack.env')

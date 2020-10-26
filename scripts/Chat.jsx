@@ -42,7 +42,10 @@ export function Chat() {
                             (message, index) => 
                             <li key={index} class="message">
                             <div class="message_box" id={"id_"+(message['user_id'] == user_id? "me":message['user_id'])}>
-                                <div class="message_user">{message['user']}</div>
+                                <div class="message_user">
+                                    <img src={message['user_pic']} class="sender_pic"></img>
+                                    {message['user']}
+                                </div>
                                 <Markup content={message['message']} />
                             </div>
                             <div class={`timestamp id_${(message['user_id'] == user_id? "me":message['user_id'])}`}>{message['timestamp']}</div>

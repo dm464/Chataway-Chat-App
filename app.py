@@ -42,7 +42,8 @@ def emit_user_count(channel):
 
 def emit_user_info(channel, email, room):
     user_id = models.AuthUser.query.filter_by(email=email).first().id
-    socketio.emit(channel, {'user_id': user_id}, room=room)
+    picture = models.AuthUser.query.filter_by(email=email).first().picture
+    socketio.emit(channel, {'user_id': user_id, "picture": picture}, room=room)
     print("Sent user_id={} to room={}".format(user_id, room))
 
 def emit_all_messages(channel, room):
@@ -50,7 +51,8 @@ def emit_all_messages(channel, room):
         {'user': db_message.user, \
         'message': db_message.message, \
         'timestamp': str(db_message.timestamp), \
-        'user_id': db_message.user_id} \
+        'user_id': db_message.user_id, \
+        'user_pic': db_message.user_pic} \
         for db_message in db.session.query(models.Message).all()
     ]
     
@@ -104,13 +106,13 @@ def on_new_message(data):
     if "main chat" in flask_socketio.rooms():
         print("Got an event for new message with data:", data)
         message = bot.render(data["message"])
-        db.session.add(models.Message(data["user"], message, data["timestamp"], data["user_id"]));
+        db.session.add(models.Message(data["user"], message, data["timestamp"], data["user_id"], data["user_pic"]));
         db.session.commit();
         
         if bot.is_bot_command(data["message"]):
             reply = bot.bot_reply(data["message"])
             bot_timestamp = datetime.now()
-            db.session.add(models.Message("bot", reply, bot_timestamp, 0));
+            db.session.add(models.Message("bot", reply, bot_timestamp, 0, bot.BOT_PIC));
             db.session.commit();
         
         emit_all_messages(MESSAGES_RECEIVED_CHANNEL, "main chat")

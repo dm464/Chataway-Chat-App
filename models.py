@@ -28,12 +28,14 @@ class Message(db.Model):
     message = db.Column(db.String(500))
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.now())
     user_id = db.Column(db.Integer, nullable=False, default=0)
+    user_pic = db.Column(db.String(300))
     
-    def __init__(self, user, message, timestamp, user_id):
+    def __init__(self, user, message, timestamp, user_id, user_pic):
         self.user = user
         self.message = message
         self.timestamp = timestamp
         self.user_id = user_id
+        self.user_pic = user_pic
         
     def __repr__(self):
         return '<Username: %s\tMessage: %s>' % (self.user, self.message)
