@@ -41,11 +41,11 @@ export function Chat() {
                         messages.map(
                             (message, index) => 
                             <li key={index} class="message">
-                            <div class="message_box" id={message['user']}>
+                            <div class="message_box" id={"id_"+(message['user_id'] == user_id? "me":message['user_id'])}>
                                 <div class="message_user">{message['user']}</div>
                                 <Markup content={message['message']} />
                             </div>
-                            <div class={`timestamp ${message['user']}`}>{message['timestamp']}</div>
+                            <div class={`timestamp id_${(message['user_id'] == user_id? "me":message['user_id'])}`}>{message['timestamp']}</div>
                             </li>)
                     }
                     </ul>

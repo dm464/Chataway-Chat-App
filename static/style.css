@@ -47,13 +47,13 @@ div.message_box {
     border-radius: 10px;
 }
 
-.message_box#dm464 {
+.message_box#id_me {
     background-color: darkslategrey;
     margin-left: auto;
     color: #c0c4c3;
 }
 
-.message_box#bot {
+.message_box#id_0 {
     background-color: #1d1d1d;
     color: seagreen;
     font-family: 'Courier Prime';
@@ -72,7 +72,7 @@ div.message_box {
     padding: 3px;
 }
 
-.timestamp.dm464 {
+.timestamp.id_me {
     margin-left: auto;
 }
 
