@@ -30,7 +30,7 @@ export function Login() {
     }
     
     return (
-        <div>
+        <div id="login-section">
             <button id="login-button" onClick={openForm}>Sign In</button>
             <div id="modal">
                 <div id="popup-signin" >

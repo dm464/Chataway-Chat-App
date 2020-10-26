@@ -154,6 +154,10 @@ button:hover {
     display: none;
 }
 
+#login-button {
+    font-size: 25px;
+}
+
 /* This modal template was taken from w3schools */
 #modal {
     display: none; /* Hidden by default */
