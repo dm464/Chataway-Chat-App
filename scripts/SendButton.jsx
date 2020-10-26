@@ -1,16 +1,22 @@
 import * as React from 'react';
 import { Socket } from './Socket';
 
+var user_id = 0;
+Socket.on("current user info", getUserId);
+function getUserId(data) {
+    user_id = data["user_id"];
+}
+
 function handleSubmit(event) {
     let user = document.getElementById("user");
     let newMessage = document.getElementById("typed_message");
     var date = new Date();
 
     console.log('User sent new message: ', newMessage, ' at ', date);
-    Socket.emit("new message sent", {"user": user.value, "message": newMessage.value, "timestamp": date});
+    Socket.emit("new message sent", {"user": user.value, "message": newMessage.value, "timestamp": date, "user_id": user_id});
     
     console.log('Sent the message \'' + newMessage.value + '\' to server!');
-    newMessage.value = ''
+    newMessage.value = '';
     event.preventDefault();
 }
 

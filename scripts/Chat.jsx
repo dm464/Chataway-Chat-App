@@ -6,6 +6,12 @@ import { Login } from './Login';
 import { Socket } from './Socket';
 import { Markup } from 'interweave';
 
+var user_id = 0;
+Socket.on("current user info", getUserId);
+function getUserId(data) {
+    user_id = data["user_id"];
+}
+
 export function Chat() {
     const [messages, setMessages] = React.useState([]);
 

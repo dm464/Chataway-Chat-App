@@ -10,16 +10,6 @@ import { Socket } from './Socket';
 export function Login() {
     const [accounts, setAccounts] = React.useState([]);
     
-    function getAllAccounts() {
-        React.useEffect(() => {
-            Socket.on('accounts received', (data) => {
-                let allAccounts = data['allAccounts'];
-                console.log("Received accounts from server: " + allAccounts);
-                setAccounts(allAccounts);
-            })
-        });
-    }
-    
     function openForm(event) {
         document.getElementById("modal").style.display = "block";
         console.log("Open form");
