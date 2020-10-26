@@ -7,20 +7,6 @@ import { FacebookButton } from './FacebookButton';
 import { Socket } from './Socket';
 
 
-/*function handleSubmit(event) {
-    let user = document.getElementById("user");
-    let newMessage = document.getElementById("typed_message");
-
-    console.log('User sent new message: ', newMessage);
-    
-    Socket.emit("new message sent", {"user": user.value, "message": newMessage.value});
-    
-    console.log('Sent the message \'' + newMessage.value + '\' to server!');
-    newMessage.value = ''
-    user.value = ''
-    event.preventDefault();
-}*/
-
 export function Login() {
     const [accounts, setAccounts] = React.useState([]);
     
@@ -34,16 +20,25 @@ export function Login() {
         });
     }
     
-    //getAllAccounts();
+    function openForm(event) {
+        document.getElementById("modal").style.display = "block";
+        console.log("Open form");
+    }
+    
+    function closeModal(event) {
+        document.getElementById("modal").style.display = "none";
+    }
     
     return (
         <div>
-            <button class="login-button" onclick="openForm()">Sign In</button>
-            <div class="form-popup" id="login-form">
-                <FacebookButton />
-                <GoogleButton />
+            <button id="login-button" onClick={openForm}>Sign In</button>
+            <div id="modal">
+                <div id="popup-signin" >
+                    <span id="close" onClick={closeModal}>&times;</span>
+                    <FacebookButton />
+                    <GoogleButton />
+                </div>
             </div>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </div>
     );
 }

@@ -23,7 +23,7 @@ class AuthUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     auth_type = db.Column(db.String(120))
     name = db.Column(db.String(120))
-    email = db.Column(db.String(120))
+    email = db.Column(db.String(120), unique=True)
     picture = db.Column(db.String(300))
     
     

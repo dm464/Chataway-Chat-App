@@ -22,7 +22,7 @@ export function UserCount() {
 
     return (
         <div>
-            <div>Users Online: {currentUsers}</div>
+            <div id="online_user_count">Users Online: {currentUsers}</div>
         </div>
     );
 }

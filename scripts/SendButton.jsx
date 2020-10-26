@@ -11,14 +11,13 @@ function handleSubmit(event) {
     
     console.log('Sent the message \'' + newMessage.value + '\' to server!');
     newMessage.value = ''
-    user.value = ''
     event.preventDefault();
 }
 
 export function SendButton() {
     return (
-        <form onSubmit={handleSubmit}>
-            <input id="user" placeholder="Username"></input><br></br>
+        <form onSubmit={handleSubmit} id="input_log">
+            <input id="user" placeholder="Username" readonly="true" ></input><br></br>
             <input id="typed_message" placeholder="Type a message..."></input><br></br>
             <button id="send-button"><i class="material-icons">send</i>Send</button>
         </form>

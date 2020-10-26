@@ -98,6 +98,10 @@ div.message_box {
     margin-bottom: 10px;
 }
 
+#input_log {
+    display: none;
+}
+
 input {
     font-family: Quicksand;
     border: none;
@@ -125,20 +129,70 @@ input:focus {
     vertical-align: top;
 }
 
-#send-button {
+button {
     font-family: Quicksand;
-    display: inline-flex;
-    align-items: center;
-    height:30px;
-    width: 75px;
-    color: white;
     border-radius: 5px;
     border-style: none;
     background-color: seagreen;
     cursor: pointer;
     transition: 500ms;
+    color: white;
 }
 
-#send-button:hover {
+button:hover {
     background-color: darkgreen;
+}
+
+#send-button {
+    display: inline-flex;
+    align-items: center;
+    height:30px;
+    width: 75px;
+}
+
+#online_user_count {
+    display: none;
+}
+
+/* This modal template was taken from w3schools */
+#modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0);
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#popup-signin {
+    background-color: #cccccc;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width: 50%;
+    max-width: 350px;
+    height: 60%;
+    border-radius: 20px;
+}
+
+#close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#close:hover,
+#close:focus {
+    color: #000;
+    cursor: pointer;
+}
+
+.kep-login-facebook {
+    margin:auto;
 }
