@@ -16,6 +16,7 @@ function handleGoogleOAuthLogin(response) {
         'username': name,
         'room': 'main chat'
     });
+    document.getElementById("modal").style.display = "none";
     document.getElementById("input_log").style.display = "block";
     document.getElementById("online_user_count").style.display = "block";
     document.getElementById("user").value = name;
