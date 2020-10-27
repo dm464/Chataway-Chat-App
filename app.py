@@ -37,8 +37,8 @@ def push_new_user_to_db(auth_type, name, email, picture):
     else:
         print("{} is already in database".format(name))
 
-def emit_user_count(channel):
-    socketio.emit(channel, {'user_count': user_count})
+def emit_user_count(channel, room):
+    socketio.emit(channel, {'user_count': user_count}, room=room)
 
 def emit_user_info(channel, email, room):
     user_id = models.AuthUser.query.filter_by(email=email).first().id
@@ -65,9 +65,6 @@ def on_connect():
     socketio.emit('connected', {
         'test': 'Connected'
     })
-    global user_count
-    user_count+=1
-
 
 @socketio.on('disconnect')
 def on_disconnect():
@@ -78,7 +75,7 @@ def on_disconnect():
     global user_count
     user_count-=1
 
-    emit_user_count(USER_COUNT_CHANNEL)
+    emit_user_count(USER_COUNT_CHANNEL, "main chat")
 
 @socketio.on('join')
 def on_join(data):
@@ -86,7 +83,11 @@ def on_join(data):
     room = data['room']
     flask_socketio.join_room(room)
     flask_socketio.send(username + ' has entered the room.', room=room)
-    emit_user_count(USER_COUNT_CHANNEL)
+    global user_count
+    print("User count before is {}".format(user_count))
+    user_count+=1
+    print("user count is {}".format(user_count))
+    emit_user_count(USER_COUNT_CHANNEL, room)
     emit_all_messages(MESSAGES_RECEIVED_CHANNEL, room)
 
 @socketio.on('new facebook user')
