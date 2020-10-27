@@ -72,9 +72,10 @@ def on_disconnect():
     socketio.emit('disconnected', {
         'test': 'Disconnected'
     })
-    global user_count
-    user_count-=1
-
+    if "main chat" in flask_socketio.rooms():
+        global user_count
+        user_count-=1
+        print("User count is {}".format(user_count))
     emit_user_count(USER_COUNT_CHANNEL, "main chat")
 
 @socketio.on('join')
@@ -84,7 +85,6 @@ def on_join(data):
     flask_socketio.join_room(room)
     flask_socketio.send(username + ' has entered the room.', room=room)
     global user_count
-    print("User count before is {}".format(user_count))
     user_count+=1
     print("user count is {}".format(user_count))
     emit_user_count(USER_COUNT_CHANNEL, room)

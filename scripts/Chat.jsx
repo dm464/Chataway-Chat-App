@@ -30,7 +30,12 @@ export function Chat() {
     }
     
     getNewMessages();
-
+    
+    function convertTime(date) {
+        var d = date.toLocaleString('en-US', { timeZone: 'America/New_York' });
+        return d;
+    }
+    
     return (
         <div>
             <h1>CHATAWAY</h1>
@@ -48,7 +53,7 @@ export function Chat() {
                                 </div>
                                 <Markup content={message['message']} />
                             </div>
-                            <div class={`timestamp id_${(message['user_id'] == user_id? "me":message['user_id'])}`}>{message['timestamp']}</div>
+                            <div class={`timestamp id_${(message['user_id'] == user_id? "me":message['user_id'])}`}>{convertTime(message['timestamp'])}</div>
                             </li>)
                     }
                     </ul>
