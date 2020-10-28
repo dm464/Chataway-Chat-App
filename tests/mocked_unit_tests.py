@@ -1,5 +1,5 @@
 '''
-    unomocked_unit_tests.py
+    mocked_unit_tests.py
     
     This file tests all unmocked methods used in bot.py and validate.py
 '''
