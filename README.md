@@ -220,7 +220,8 @@ component, this could potentially lead to attacks.
 The reason I chose to test the code that I did is because the bot commands are what determines proper user interaction with
 the chat bot.  Also, those functions make up the majority of the python code.
 
-If I had the time, I would have liked to have tested some of the bot commands that use the funtranslate API.
+If I had the time, I would have liked to have tested some of the bot commands that use the location API.
+I would have also liked to have tested more mocked functionality liked the database and socketio functions.
 
 
 ## Author
