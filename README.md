@@ -212,10 +212,16 @@ that parses the string and returns html tags.
 
 
 ## Known Issues & Further Improvements
-1. The overall layout of the app can be improved.  I currently don’t have the username remaining constant on the page.
-Also, the user’s photo doesn’t display next to the message.
+1. The layout of the oauth login screen can be improved. It currently looks very cheap and unaesthetic.
 2. There are some security risks with this app since the messages the users types are being rendered by the Interweave
 component, this could potentially lead to attacks.
+
+## Reason For Chosen Test Code
+The reason I chose to test the code that I did is because the bot commands are what determines proper user interaction with
+the chat bot.  Also, those functions make up the majority of the python code.
+
+If I had the time, I would have liked to have tested some of the bot commands that use the funtranslate API.
+
 
 ## Author
 Denisse Mendoza
