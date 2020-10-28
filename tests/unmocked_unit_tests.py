@@ -70,7 +70,7 @@ class BotTestCase(unittest.TestCase):
             {
                 KEY_INPUT: TEST_LINK2,
                 KEY_EXPECTED: {
-                    KEY_IS_BOT: True,
+                    KEY_IS_BOT: False,
                     KEY_BOT_REPLY: None,
                     KEY_IS_LINK: True,
                     KEY_IS_IMAGE: False,
@@ -155,7 +155,7 @@ class BotTestCase(unittest.TestCase):
             self.assertEqual(response, expected)
     
     def test_bot_reply_failure(self):
-        for test in self.success_test_params:
+        for test in self.failure_test_params:
             response = bot.bot_reply(test[KEY_INPUT]) if bot.is_bot_command(test[KEY_INPUT]) else None
             expected = test[KEY_EXPECTED][KEY_BOT_REPLY]
             
