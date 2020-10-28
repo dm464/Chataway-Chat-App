@@ -9,6 +9,20 @@ DATE = "date"
 FUNSTRANSLATE = "funtranslate"
 BOT_PIC = "https://media.istockphoto.com/vectors/robot-icon-vector-artificial-intelligence-vector-id1161996344"
 
+BOT_HELP_REPLY = "Do you need my help? Use the following commands: <br>\
+!! about - get a description about me<br>\
+!! help - displays list of bot commands<br>\
+!! location - current location<br>\
+!! time - current local time<br>\
+!! date - current date<br>\
+!! funtranslate message - I'll translate the message into Shakespearean English"
+BOT_LOCATION_REPLY = "Your current location is {}, {} {}"
+BOT_TIME_REPLY = "The time is {}"
+BOT_DATE_REPLY = "Today is {}"
+BOT_INVALID_COMMAND_REPLY = "Uh oh! \'{}\' is not a valid command.<br>Type \'!! help\' for guidance."
+RENDERED_LINK_TEMPLATE = "<a class=\"message_link\"href=\"{}\" target=\"_blank\">{}</a>"
+RENDERED_IMAGE_TEMPLATE = "<br><img src=\"{}\" alt=\"{}\" class=\"message-image\">"
+
 try:
     dotenv_path = os.path.join(os.path.dirname(__file__), 'ipstack.env')
     dotenv.load_dotenv(dotenv_path)
@@ -17,15 +31,10 @@ except AttributeError:
 IPSTACK_KEY=os.environ["IPSTACK_KEY"]
 
 def is_bot_command(message):
-    message_arr = message.split(" ")
-    if message_arr[0]=="!!":
-        return True
-    else:
-        return False
+    return message.startswith("!!")
 
 def bot_reply(message):
     message_arr = message.split(" ")
-    print(message_arr)
     command = message_arr[1]
     if command == ABOUT:
         return about_command()
@@ -40,20 +49,13 @@ def bot_reply(message):
     elif command == FUNSTRANSLATE:
         return funtranslate_command(message)
     else:
-        return "Uh oh! \'{}\' is not a valid command.<br>Type \'!! help\' for guidance.".format(message)
+        return invalid_command(message)
 
 def about_command():
     return "How art thou? T'is I, none other than Sir Robot. I am hither to assist thee."
     
 def help_command():
-    ret_str = "Do you need my help? Use the following commands: <br>"
-    ret_str += "!! about - get a description about me<br>"
-    ret_str += "!! help - displays list of bot commands<br>"
-    ret_str += "!! location - current location<br>"
-    ret_str += "!! time - current local time<br>"
-    ret_str += "!! date - current date<br>"
-    ret_str += "!! funtranslate message - I'll translate the message into Shakespearean English"
-    return ret_str;
+    return BOT_HELP_REPLY;
 
 def location_command():
     url = "http://api.ipstack.com/check?access_key={}".format(IPSTACK_KEY)
@@ -62,15 +64,15 @@ def location_command():
     region = json_body["region_name"]
     country_code = json_body["country_code"]
     # For further enhancement, I can add flag emoji
-    return "Your current location is {}, {} {}".format(city, region, country_code)
+    return BOT_LOCATION_REPLY.format(city, region, country_code)
 
 def time_command():
     time = datetime.now().strftime("%H:%M")
-    return "The time is " + time
+    return BOT_TIME_REPLY.format(time)
 
 def date_command():
     today = date.today().strftime("%B %d, %Y")
-    return "Today is " + today
+    return BOT_DATE_REPLY.format(today)
 
 def funtranslate_command(message):
     message = message[len("!! {} ".format(FUNSTRANSLATE)):]
@@ -79,12 +81,23 @@ def funtranslate_command(message):
     translated_message = json_body["contents"]["translated"]
     return translated_message
 
+def invalid_command(message):
+    return BOT_INVALID_COMMAND_REPLY.format(message)
+
+def is_link(message):
+    if validators.url(message):
+        return True
+    else:
+        return False
+
+def is_image(message):
+    return validate.imageFile(message)
+
 def render(message):
-    valid=validators.url(message)
-    if valid:
-        rendered_message = "<a class=\"message_link\"href=\"{}\" target=\"_blank\">{}</a>".format(message, message)
-        if validate.imageFile(message):
-            rendered_message += "<br><img src=\"{}\" alt=\"{}\" class=\"message-image\">".format(message, message)
+    if is_link(message):
+        rendered_message = RENDERED_LINK_TEMPLATE.format(message, message)
+        if is_image(message):
+            rendered_message += RENDERED_IMAGE_TEMPLATE.format(message, message)
         return rendered_message
     else:
         return message
