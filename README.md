@@ -5,6 +5,8 @@ http://chataway-app.herokuapp.com/
 This project uses Flask(in Python), React, PostgreSQL, Facebook and Google OAuth, Socket.io, and several APIs along with Heroku to deploy a web
 chat application that allows users to sign in and chat publically with other online users.  This app provides persistence with the 
 
+![Chataway Chat App](resources/Chataway.JPG?raw=true "Chataway Chat App")
+
 ## Setup
 To use this repository, you must follow these steps:
 ### 0. Clone this repo

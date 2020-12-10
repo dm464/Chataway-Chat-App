@@ -30,7 +30,7 @@
     ]
   },
   "dependencies": {
-    "html-react-parser": "^0.14.0",
+    "html-react-parser": "^0.14.1",
     "interweave": "^12.5.0",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.1.22",
