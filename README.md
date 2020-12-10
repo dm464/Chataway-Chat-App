@@ -2,8 +2,9 @@
 # Chataway Chat Application
 http://chataway-app.herokuapp.com/
 ## Description
-This project uses Flask(in Python), React, PostgreSQL, Facebook and Google OAuth, Socket.io, and several APIs along with Heroku to deploy a web
-chat application that allows users to sign in and chat publically with other online users.  This app provides persistence with the 
+Chataway is a public chat application! After users sign in by using either Facebook or Google OAuth, they can publicly send text messages, images, and links to other online users.  One can view a live display of the number of users that are currently logged in.  Users also have the ability to interact with a chat bot by sending messages with specified bot commands.  When sending the message "!! help", the bot will respond with details on how to interact with it.
+
+This project uses Flask(in Python), React, PostgreSQL, Facebook and Google OAuth, Socket.io, and several APIs along with Heroku for deployment. This app provides persistence through the PostgreSQL database, manipulated using SQLAlchemy ORM.
 
 ![Chataway Chat App](resources/Chataway.JPG?raw=true "Chataway Chat App")
 
