@@ -8,6 +8,27 @@ This project uses Flask(in Python), React, PostgreSQL, Facebook and Google OAuth
 
 ![Chataway Chat App](resources/Chataway.JPG?raw=true "Chataway Chat App")
 
+## Potential Improvements & Enhancements
+1. Chataway could display a screen with a list of all users that are currently logged in.  This would improve interraction through the app.
+2. A big enhancement could be to give the user the ability to create chat rooms/groups through which a select people can send messages to each other.
+
+## Challenges Faced and Troubleshooting
+1. I had difficulty understanding how to use sockets.  In particular, I was having a hard time trying to figure out how to prevent users who weren’t logged in yet from sending messages to the chat.  Also, I was having a hard time understanding how to display the messages that were saved on the database to a user only upon logging in.  To solve this problem, I spent a long time reading the flask-socketio documentation.  I realized later that I could make use of the rooms feature on sockets.  In doing this, I can make the main chat in the room, that the user can join only upon successful login. Upon joining the room, the user was then emitted the chat history from the server
+2. I had a hard time rendering the messages that the user sent that were meant to be links/images.  The reason for this is because the messages were being passed from the server to the client as strings so tags within the string were not being rendered and were being shown on the webpage.  As I did research, I found there exists a React component called Interweave that parses the string and returns html tags.
+
+## Known Issues
+1. The layout of the oauth login screen can be improved. It currently looks very cheap and unaesthetic.
+2. There are some security risks with this app since the messages the users types are being rendered by the Interweave component, this could potentially lead to attacks.
+3. The structure of the React/JS files could utilize best practices. Several parts of the programs (like messages) could be made into components.  This will not only increase readability but will make the code more modularized.
+4. When the user sends a new message, the display doesn't scroll down to the sent message.
+
+## Reason For Chosen Test Code
+The reason I chose to test the code that I did is because the bot commands are what determines proper user interaction with
+the chat bot.  Also, those functions make up the majority of the python code.
+
+If I had the time, I would have liked to have tested some of the bot commands that use the location API.
+I would have also liked to have tested more mocked functionality liked the database and socketio functions.
+
 ## Setup
 To use this repository, you must follow these steps:
 ### 0. Clone this repo
@@ -198,34 +219,6 @@ and verify that the React renders. You should the chat app.
 5.	After the app builds, navigate to your newly-created heroku site!
 6.	If the app is not working then restart all dynos from heroku app console
 7. If you are still having issues, you may use heroku logs --tail to see what's wrong.
-
-
-
-## Troubleshoot
-1. I had difficulty understanding how to use sockets.  In particular, I was having a hard time trying to figure out how to
-prevent users who weren’t logged in yet from sending messages to the chat.  Also, I was having a hard time understanding
-how to display the messages that were saved on the database to a user only upon logging in.  To solve this problem, I 
-spent a long time reading the flask-socketio documentation.  I realized later that I could make use of the rooms feature 
-on sockets.  In doing this, I can make the main chat in the room, that the user can join only upon successful login.  
-Upon joining the room, the user was then emitted the chat history from the server
-2. I had a hard time rendering the messages that the user sent that were meant to be links/images.  The reason for this is 
-because the messages were being passed from the server to the client as strings so tags within the string were not being
-rendered and were being shown on the webpage.  As I did research, I found there exists a React component called Interweave 
-that parses the string and returns html tags.
-
-
-## Known Issues & Further Improvements
-1. The layout of the oauth login screen can be improved. It currently looks very cheap and unaesthetic.
-2. There are some security risks with this app since the messages the users types are being rendered by the Interweave
-component, this could potentially lead to attacks.
-
-## Reason For Chosen Test Code
-The reason I chose to test the code that I did is because the bot commands are what determines proper user interaction with
-the chat bot.  Also, those functions make up the majority of the python code.
-
-If I had the time, I would have liked to have tested some of the bot commands that use the location API.
-I would have also liked to have tested more mocked functionality liked the database and socketio functions.
-
 
 ## Author
 Denisse Mendoza
